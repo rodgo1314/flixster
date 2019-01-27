@@ -19,7 +19,7 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 <img src="http://g.recordit.co/IKDogy1Snc.gif" width=250><br>
 
 ### Notes
-Describe any challenges encountered while building the app.
+Some challenges I faces was learning how to really use Github since I started working on different devices. Another major challenge I faces was learning how to read exceptions and see why the compiler was complaining. I learned the importance of using the correct subclasses when making a new file because the compiler was expecting one type but I had made another type all in all I learned alot and if it wasn't for school and personal life I would've added more to my app I honestly found it very fun. 
 
 ## Flix Part 1
 
