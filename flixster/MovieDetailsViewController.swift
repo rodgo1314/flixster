@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AlamofireImage
 class MovieDetailsViewController: UIViewController {
     
     @IBOutlet weak var backDropView: UIImageView!
@@ -20,10 +20,24 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let baseURL = "https://image.tmdb.org/t/p/w185"
+        let posterPath = movie["poster_path"] as! String
+        let posterURL = URL(string: baseURL + posterPath
+        )
+        posterView.af_setImage(withURL: posterURL!)
+        
+        
+        let backdropPath = movie["backdrop_path"] as! String
+        let backdropURL = URL(string: "https://image.tmdb.org/t/p/w780" + backdropPath
+        )
+        backDropView.af_setImage(withURL: backdropURL!)
+        
         
         titleLabel.text = movie["title"] as? String
-        
+        titleLabel.sizeToFit()
         summaryLabel.text = movie["overview"] as? String
+        summaryLabel.sizeToFit()
+        
         
         
         
