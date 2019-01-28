@@ -117,6 +117,51 @@
             </objects>
             <point key="canvasLocation" x="134" y="1746"/>
         </scene>
+        <!--Movie Grid Details View Controller-->
+        <scene sceneID="s7e-re-OR4">
+            <objects>
+                <viewController id="tFp-nh-roX" customClass="MovieGridDetailsViewController" customModule="flixster" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ehw-ms-QCz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYO-Ov-tAy">
+                                <rect key="frame" x="0.0" y="64" width="375" height="227"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YFZ-GS-AKD">
+                                <rect key="frame" x="16" y="197" width="111" height="155"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJI-LP-oye">
+                                <rect key="frame" x="135" y="299" width="224" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4U-ag-dMg">
+                                <rect key="frame" x="8" y="360" width="359" height="130"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="vAn-WG-LJB"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="YFZ-GS-AKD" id="ziD-kW-jTL"/>
+                        <outlet property="posterView" destination="gYO-Ov-tAy" id="mj3-fI-49G"/>
+                        <outlet property="summaryView" destination="A4U-ag-dMg" id="bhG-Hf-tVw"/>
+                        <outlet property="titleView" destination="DJI-LP-oye" id="Epk-zN-dfR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zBk-gi-6ff" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1372" y="1745.577211394303"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="b82-3U-3xk">
             <objects>
@@ -194,6 +239,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="posterView" destination="NTS-hC-bSR" id="4DP-tf-knQ"/>
+                                            <segue destination="tFp-nh-roX" kind="show" id="WlI-c5-pWl"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
