@@ -24,7 +24,8 @@ class MainFlixViewController: UIViewController,UITableViewDataSource,UITableView
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
         
         tableView.dataSource = self
         tableView.delegate = self
