@@ -18,7 +18,7 @@ class MainFlixViewController: UIViewController,UITableViewDataSource,UITableView
     @IBOutlet weak var tableView: UITableView!
     
     let myRefreshControl = UIRefreshControl()
-    
+    var page: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +32,20 @@ class MainFlixViewController: UIViewController,UITableViewDataSource,UITableView
         tableView.delegate = self
         loadMovies()
         
+        myRefreshControl.addTarget(self, action: #selector(loadMoreMovies), for: .valueChanged)
+        
+        tableView.refreshControl = myRefreshControl
+        
+        
+        
         
     }
     
-    func loadMovies(){
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
+    @objc func loadMovies(){
+        page = 1
+        
+        
+        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&page=\(page ?? 1)")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -49,6 +58,7 @@ class MainFlixViewController: UIViewController,UITableViewDataSource,UITableView
                 self.movies = dataDictionary["results"] as! [[String:Any]]
                 
                 self.tableView.reloadData()
+                self.myRefreshControl.endRefreshing()
                 // TODO: Get the array of movies
                 // TODO: Store the movies in a property to use elsewhere
                 // TODO: Reload your table view data
@@ -58,7 +68,32 @@ class MainFlixViewController: UIViewController,UITableViewDataSource,UITableView
         task.resume()
     }
     
-    
+    @objc func loadMoreMovies(){
+        page = page + 1
+        
+        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&page=\(page ?? 1)")!
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        let task = session.dataTask(with: request) { (data, response, error) in
+            // This will run when the network request returns
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let data = data {
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                
+                self.movies = dataDictionary["results"] as! [[String:Any]]
+                
+                self.tableView.reloadData()
+                self.myRefreshControl.endRefreshing()
+                // TODO: Get the array of movies
+                // TODO: Store the movies in a property to use elsewhere
+                // TODO: Reload your table view data
+                
+            }
+        }
+        task.resume()
+        
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,7 +102,7 @@ class MainFlixViewController: UIViewController,UITableViewDataSource,UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let x = "123"
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieViewCell") as! MovieViewCell
         
         
@@ -75,8 +110,14 @@ class MainFlixViewController: UIViewController,UITableViewDataSource,UITableView
         let title = movie["title"] as! String
         let summary = movie["overview"] as! String
         let baseURL = "https://image.tmdb.org/t/p/w185"
-        let posterPath = movie["poster_path"] as! String
-        let posterURL = URL(string: baseURL + posterPath
+        
+        let posterPath = movie["poster_path"] as? String ?? nil
+        
+        if posterPath == nil{
+            let posterURL = ""
+        }
+        
+        let posterURL = URL(string: baseURL + posterPath!
         )
         
         cell.titleLabel.text = title
